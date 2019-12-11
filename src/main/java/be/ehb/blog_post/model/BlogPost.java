@@ -23,8 +23,8 @@ public class BlogPost {
 
     private LocalDate date;
 
-
     public BlogPost() {
+        date = LocalDate.now();
     }
 
     public int getId() {

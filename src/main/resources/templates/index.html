@@ -19,44 +19,51 @@
     <title>Title</title>
 </head>
 <body>
+<header>
+    <h1>!Blog Exposed!</h1>
+</header>
+
 <div class="container-fluid">
 
-    <form method="post" th:action="@{~/index}" th:object="${nSnack}">
-        <div>
-            <label>Username</label>
-            <input th:field="*{name}" type="text" placeholder="Username"/>
+    <form method="post" th:action="@{~/index}" th:object="${nBlog}">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input class="form-control" id="username" th:field="*{username}" type="text" placeholder="Username"/>
             <br>
-            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error"></span>
-            <br>
+            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error"></span>
         </div>
-        <div>
-            <label>Title</label>
-            <input th:field="*{price}" type="text" placeholder="Text"/>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input class="form-control" id="title" th:field="*{title}" type="text" placeholder="Title"/>
             <br>
-            <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="error"></span>
-            <br>
+            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error"></span>
         </div>
-        <div>
-            <label>Inhoud</label>
-            <input th:field="*{price}" type="text" placeholder="Text"/>
+        <div class="form-group">
+            <label for="inhoud">Inhoud</label>
+            <textarea class="form-control" id="inhoud" rows="4" cols="50" th:field="*{text}" placeholder="Text"></textarea>
             <br>
-            <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="error"></span>
-            <br>
+            <span th:if="${#fields.hasErrors('text')}" th:errors="*{text}" class="error"></span>
         </div>
-        <div>
-            <input type="submit">
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit">
         </div>
     </form>
 
-    <div th:each="blog : ${all}">
+    <div th:each="blog,iterStat : ${all}" class="OddStyle">
         <h1 th:text="${blog .title}"></h1>
 
-        <p th:text="${blog .date}"></p>
-        <p th:text="${blog .username}"></p>
+        <p th:text="${blog .date}" class="small"></p>
+        <p th:text="${blog .username}" class="small"></p>
 
         <p th:text="${blog .text}"></p>
+
+        <p><a th:href="@{~/delete/{id}(id = ${blog .id})}" >Delete</a></p>
     </div>
 
 </div>
+
+<footer>
+    <p>	&copy;Ghysels Dymas</p>
+</footer>
 </body>
 </html>

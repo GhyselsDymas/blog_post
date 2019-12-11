@@ -1,0 +1,37 @@
+body{margin: 0;
+        padding:0;}
+
+header , footer{background-color: palevioletred;
+                color: white;
+                text-align: center;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                margin-bottom: 10px;}
+
+footer {margin-bottom: 0;}
+
+.OddStyle:nth-child(odd) {background: mistyrose;
+                            text-align: right;}
+
+.OddStyle:nth-child(odd) h1 {margin-right: 20px;}
+
+.OddStyle:nth-child(odd) p {margin-right: 20px;}
+
+.OddStyle h1 {margin-top: 20px;
+                margin-left: 20px;
+                color: rebeccapurple;}
+
+.OddStyle p {margin-left: 20px;}
+
+.small {font-size: 0.8em;
+            color: deeppink;
+            margin:0;}
+
+.btn-primary {background-color: palevioletred !important;
+                width: 100%;
+                border: none !important;}
+
+.btn-primary:hover {background-color: #bc6181 !important;}
+
+.container-fluid {width: 80% !important;
+                    margin-left: 10% !important;}
