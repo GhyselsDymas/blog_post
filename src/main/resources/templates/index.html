@@ -16,48 +16,66 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
+
+
     <title>Title</title>
 </head>
 <body>
 <header>
-    <h1>!Blog Exposed!</h1>
+    <h1>Blog Exposed</h1>
 </header>
 
 <div class="container-fluid">
 
     <form method="post" th:action="@{~/index}" th:object="${nBlog}">
         <div class="form-group">
-            <label for="username">Username</label>
-            <input class="form-control" id="username" th:field="*{username}" type="text" placeholder="Username"/>
-            <br>
+            <label for="username" th:text="#{username}"></label>
+            <input class="form-control" id="username" th:field="*{username}" type="text" th:placeholder="#{username}"/>
             <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error"></span>
         </div>
         <div class="form-group">
-            <label for="title">Title</label>
-            <input class="form-control" id="title" th:field="*{title}" type="text" placeholder="Title"/>
-            <br>
+            <label for="title" th:text="#{title}"></label>
+            <input class="form-control" id="title" th:field="*{title}" type="text" th:placeholder="#{title}"/>
             <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error"></span>
         </div>
         <div class="form-group">
-            <label for="inhoud">Inhoud</label>
-            <textarea class="form-control" id="inhoud" rows="4" cols="50" th:field="*{text}" placeholder="Text"></textarea>
-            <br>
+            <label for="inhoud" th:text="#{content}"></label>
+            <textarea class="form-control" id="inhoud" th:field="*{text}"></textarea>
             <span th:if="${#fields.hasErrors('text')}" th:errors="*{text}" class="error"></span>
         </div>
         <div class="form-group">
-            <input class="btn btn-primary" type="submit">
+            <input class="btn btn-primary btn-submit" type="submit" th:value="#{submit}">
         </div>
     </form>
 
-    <div th:each="blog,iterStat : ${all}" class="OddStyle">
-        <h1 th:text="${blog .title}"></h1>
+    <div th:each="blog : ${all}" class="OddStyle">
+        <h1 th:text="${blog.title}"></h1>
 
-        <p th:text="${blog .date}" class="small"></p>
-        <p th:text="${blog .username}" class="small"></p>
+        <p th:text="${blog.date}" class="small"></p>
+        <p th:text="${blog.username}" class="small"></p>
 
-        <p th:text="${blog .text}"></p>
+        <p th:text="${blog.text}"></p>
 
-        <p><a th:href="@{~/delete/{id}(id = ${blog .id})}" >Delete</a></p>
+        <a th:href="'#model'+${blog.id}" data-toggle="modal"><button class="btn btn-primary " th:text="#{delete}"></button></a>
+
+
+        <div th:id="'model'+${blog.id}" class="modal fade">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" th:text="#{sureMessage}"></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p th:text="#{messageText}"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal" th:text="#{cancel}"></button>
+                        <a th:href="@{~/delete/{id}(id=${blog.id})}"><button class="btn btn-primary " th:text="#{delete}"></button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
@@ -65,5 +83,7 @@
 <footer>
     <p>	&copy;Ghysels Dymas</p>
 </footer>
+
+
 </body>
 </html>

@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface BlogPostDAO extends CrudRepository<BlogPost, Integer> {
 
-    @Query("SELECT b FROM BlogPost b ORDER BY b.date desc")
+    @Query("SELECT b FROM BlogPost b ORDER BY b.date asc")
     Iterable<BlogPost> findAllByDate();
 }

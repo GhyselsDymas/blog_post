@@ -5,7 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
@@ -14,11 +13,11 @@ public class BlogPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Size (min = 4 , max = 20 , message = "Username has to be between 4-20 characters")
+    @Size (min = 4 , max = 20 , message = "{usernameError}")
     private String username;
-    @NotBlank (message = "Title can not be empty")
+    @NotBlank (message = "{titleError}")
     private String title;
-    @NotBlank (message = "Text can not be empty")
+    @NotBlank (message = "{textError}")
     private String text;
 
     private LocalDate date;
